@@ -1,0 +1,61 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:mysql://localhost:3306/webapp
+    username: root
+    password: root
+    driverClassName: com.mysql.cj.jdbc.Driver
+
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+
+server:
+  error:
+    path: /error
+
+mail:
+  username: artursorokabsuir@gmail.com
+  password: efchmzhjlmuminfn
+  host: smtp.gmail.com
+  auth: true
+  starttls.enable: true
+  debug: true
+  port:  587
+
+scheduling:
+  cron: 0 0 0 * * *
+#    cron: 0 0 0 * * *
+
+
+log4jdbc:
+  drivers: org.h2.Driver
+  auto:
+    load:
+      popular:
+        drivers: false
+
+logging:
+  level:
+    root: INFO
+    jdbc:
+      sqlonly: OFF
+      sqltiming: INFO
+      audit: OFF
+      resultsettable: INFO
+      resultset: OFF
+      connection: OFF
+
+---
+spring:
+  config:
+    activate:
+      on-profile: docker
+  datasource:
+    url: jdbc:mysql://mysqldb:3306/webapp
+    username: root
+    password: root
+    driverClassName: com.mysql.cj.jdbc.Driver

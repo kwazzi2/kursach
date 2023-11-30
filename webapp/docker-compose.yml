@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  mysqldb:
+    environment:
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_DATABASE: webapp
+    image: mysql:latest
+    ports:
+      - "3306:3306"
+    volumes:
+      - db:/var/lib/mysql
+
+
+  application:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    working_dir: /home/app/
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysqldb
+volumes:
+  db:
